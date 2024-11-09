@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: bookalbum
-        image: sreedocker123/bookmoviealbum:latest
+        image: neehar2601/bookalbum:v1
         ports:
         - containerPort: 80

@@ -1,0 +1,37 @@
+basic-php-website
+new item-> php_step1
+freestyle project
+->paste git url 
+https://github.com/VIJETH2001/basic-php-website.git
+->*/master
+
+Add build steps
+->Execute shell
+
+# Navigate to the workspace
+cd $WORKSPACE
+
+# Start Apache service
+sudo service apache2 start
+
+# Copy project files to the Apache server's web directory
+sudo cp -r * /var/www/html/
+
+# Restart Apache service to apply the changes
+sudo service apache2 restart
+
+save and Build
+(dont know where it hosted)
+
+new item-> php_step2
+copy from php_step1
+
+add build step-> Docker Build and Publish
+->repo name- vijeth2001/php
+->tag- v1
+-> registry credentials-(choose docker credentials) 
+Add build step -> Execute shell
+docker run -it -d -p 8010:80 vijeth2001/php
+save and build
+
+go to browser and type localhost:8010

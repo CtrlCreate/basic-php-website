@@ -13,3 +13,41 @@ spec:
   selector:
     app: bookalbum
 
+
+
+
+/////mine 
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: static-website-service
+spec:
+  selector:
+    app: static-website
+  ports:
+    - protocol: TCP
+      port: 80  # External port accessible within the cluster
+      targetPort: 8081  # Container port exposed by the app
+  type: LoadBalancer  # You can change this to ClusterIP if it's internal or NodePort if needed
+
+
+  ///mine 
+
+  apiVersion: v1
+kind: Service
+metadata:
+  name: apache-service
+  labels:
+    app: static-website
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080 # Adjust based on your environment
+  selector:
+    app: static-website
+
+

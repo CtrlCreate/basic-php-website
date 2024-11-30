@@ -19,3 +19,71 @@ spec:
         image: neehar2601/bookalbum:v1
         ports:
         - containerPort: 80
+
+
+
+
+/////mine 
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-website-deployment
+  labels:
+    app: static-website
+spec:
+  replicas: 1  # You can increase this number for scaling
+  selector:
+    matchLabels:
+      app: static-website
+  template:
+    metadata:
+      labels:
+        app: static-website
+    spec:
+      containers:
+      - name: static-website-container
+        image: your-docker-repository/static-website:latest  # Update with your image name
+        ports:
+        - containerPort: 8081
+        volumeMounts:
+        - name: html-volume
+          mountPath: /var/www/html/cafe  # Match the location in your Dockerfile
+      volumes:
+        - name: html-volume
+          emptyDir: {}  # Use an emptyDir for temporary storage or use a Persistent Volume (PV)
+
+
+
+////mine
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-static-website
+  labels:
+    app: static-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: static-website
+  template:
+    metadata:
+      labels:
+        app: static-website
+    spec:
+      containers:
+      - name: apache-container
+        image: your-dockerhub-username/apache-webserver:latest # Replace with your actual image name
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: website-content
+          mountPath: /usr/local/apache2/htdocs
+      volumes:
+      - name: website-content
+        emptyDir: {} # Change to persistent volume if needed
+
+

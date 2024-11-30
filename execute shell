@@ -1,0 +1,11 @@
+# Navigate to the workspace
+cd $WORKSPACE
+
+# Start Apache service
+sudo service apache2 start
+
+# Copy project files to the Apache server's web directory
+sudo cp -r * /var/www/html/
+
+# Restart Apache service to apply the changes
+sudo service apache2 restart
